@@ -37,7 +37,7 @@ fileUrl <- "https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv
 if(!file.exists("data/repdata-data-StormData.csv.bz2"))
   download.file(
       fileUrl, "data/repdata-data-StormData.csv.bz2", 
-      method = "auto", mode = "eb"
+      method = "auto", mode = "wb"
   )
 dataPrin <- read.csv("data/repdata-data-StormData.csv.bz2")
 ```
@@ -88,7 +88,7 @@ eventForHealth <- dataPrin[
 ]
 ```
 
-8. Sum the fatalities and injuriesand after merge the data to get a data with injuries and fatalities differentiated.
+8. Sum the fatalities and injuries and after merge the data to get a data with injuries and fatalities differentiated.
 
 ```{r}
 topTenHealtInjuries <- aggregate(
@@ -117,7 +117,7 @@ topTenHealt <- merge(topTenHealt, topEventHealth[,c('EVTYPE', 'levelDanger')])
 topTenHealt$EVTYPE <- factor(topTenHealt$EVTYPE, levels = topEventHealth$EVTYPE)
 ```
 
-9. For the economic aggregated the iPROPDMG and CROPDMG per event.
+9. For the economic aggregate the PROPDMG and CROPDMG per event.
 
 ```{r}
 topEventEconomic <- aggregate(
@@ -144,7 +144,7 @@ eventForEconomic <- dataPrin[
   ]
 ```
 
-11. Sum the fatalities and injuriesand after merge the data to get a data with injuries and fatalities differentiated.
+11. Sum the fatalities and injuries and after merge the data to get a data with injuries and fatalities differentiated.
 
 ```{r}
 topTenEconomicPropdmg <- aggregate(
@@ -180,8 +180,8 @@ topTenEconomic$EVTYPE <- factor(topTenEconomic$EVTYPE, levels = topEventEconomic
 We can see in this panel that the 3 most dangerous event to the health are the Tornado, Excessive Heat and Lightning.
 
 **Tornado:** although, the tendency have been decreased, in 2010 there was a increase in injuries and fatalities similar to before of 1974.  
-**Excessive heat:** although, it appeared until in 1992, have caused an averge of 1000 injuries and 240 fatalities for each three years.  
-**Lightning:** it appeared until 1992 and have been decreased.
+**Excessive heat:** although, it appears until in 1992, have caused an average of 1000 injuries and 240 fatalities for each three years.  
+**Lightning:** it appeared  until 1992 and have been decreased.
 
 ```{r}
 ggplot(
